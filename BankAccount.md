@@ -69,11 +69,21 @@ dd if=file.raw bs=1 skip=$((0x21c72)) count=16 of=segment_ffda.bin
 ```
 
 #### 3. Recover JPG
-Well, the result is still not perfect, but at least the bank account number is almost visible. This is likely due to some missing fragments that I haven't been able to locate yet. Maybe I’ll be able to find them next time.
+Well, the result is still not perfect, but at least the bank account number is almost visible. This is likely due to some missing fragments that I haven’t been able to locate yet. Maybe I’ll be able to find them next time.
+Here’s the first image I recovered:
 
-![Recovered](/img/BankAccount/3-1.jpg)
+![FirstPicture](/img/BankAccount/3-1.png)
 
-According to someone who has completed this challenge, the correct bank account number is *__983456 294001 991201__*. However, I still want to identify exactly which fragments are missing. If you happen to find them, please let me know.
+I tried modifying the hex data by including all bytes before the FF00 fragments in the file. This allowed me to recover almost the entire number. The account number appears to be divided into three groups, each consisting of six digits. However, I was still missing one digit to complete the challenge.
+Here’s the second image I managed to recover:
+
+![SecondPicture](/img/BankAccount/3-2.png)
+
+Lastly, I attempted to remove all hex data before the first FF00 fragment I found. With this approach, I obtained the final image.
+
+![ThirdPicture](/img/BankAccount/3-3.png)
+
+And finally, I was able to fully recover the bank account number: 983456 294001 991201.
 
 🎯 *"FORENSICS IS FUN"*
 
