@@ -6,7 +6,6 @@ Your company has been contacted by a very wealthy and influential entrepreneur w
 
 ## Operating-System
 
-KALI LINUX
 ![Kali](/img/KaliLinux.jpg)
 
 ## Tools
