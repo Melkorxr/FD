@@ -46,7 +46,7 @@ Here is the breakdown of the byte sizes I extracted for each:
     FFDA = 16 bytes
 
 For FFC4, FF00, and FFD9, I extracted all occurrences found in the image.
-The most challenging part was collecting all the FF00 fragments, as they were numerous and scattered throughout the file. I used the dd command-line tool to extract each fragment into separate files, then combined all fragments into a single file and saved it with a .jpg extension.
+The most challenging part was collecting all the FF00 fragments, as they were numerous and scattered throughout the file. I used the dd command-line tool to extract each fragment into separate files, then combined all fragments into a single file using Ghex and saved it with a .jpg extension.
 ```bash
 dd if=file.raw bs=1 skip=$((0x000b0a00)) count=16 of=segment_ffd8.bin
 ```
