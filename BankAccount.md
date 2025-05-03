@@ -76,6 +76,6 @@ Well, the result is still not perfect, but at least the bank account number is a
 
 According to someone who has completed this challenge, the correct bank account number is *__983456 294001 991201__*. However, I still want to identify exactly which fragments are missing. If you happen to find them, please let me know.
 
-🎯 *FORENSICS IS FUN*
+🎯 *"FORENSICS IS FUN"*
 
 © Melkorxr 2025
