@@ -6,7 +6,7 @@ Your company has been contacted by a very wealthy and influential entrepreneur w
 
 ## Operating-System
 
-![Kali](/img/KaliLinux.jpg)
+[Kali](/img/KaliLinux.jpg)
 
 ## Tools
 
@@ -18,17 +18,17 @@ Your company has been contacted by a very wealthy and influential entrepreneur w
 
 #### 1. Use Autopsy
 First, I created a case named Bank Account in Autopsy and added the image file to it. Upon analysis, we can see that there are four partitions or disks present. We only need the fourth partition, which is formatted in FAT32.
-![PartitionDisk](/img/BankAccount/1-1.png)
+[PartitionDisk](/img/BankAccount/1-1.png)
 
 Next, I examined the details of this partition and also chose to extract unallocated files. I navigated to Image Details → FAT Contents, then clicked on EOF. I selected sector number 1, with number of sectors set to 14000, and type set to Unallocated Data, then clicked View.
-![ImageDetails](/img/BankAccount/1-2.png)
+[ImageDetails](/img/BankAccount/1-2.png)
 
-![Contents](/img/BankAccount/1-3.png)
+[Contents](/img/BankAccount/1-3.png)
 After that, I changed the display to ASCII, where I observed a "JFIF" string—indicating that the data may contain a JPEG file. I then proceeded to extract the contents for further analysis.
 
 #### 2. Use Ghex
 After exporting the content in .raw file format, I opened it in GHex to examine the hex values. I noticed that the JPEG file was extremely fragmented, so I needed to locate and collect all the fragments in order to recover the complete JPEG file.
-![Ghex](/img/BankAccount/2-1.png)
+[Ghex](/img/BankAccount/2-1.png)
 The key fragments required for reconstruction include the header (FFD8) along with the following markers: FFE0, FFE1, FFE2, two instances of FFBD, FFC0, four instances of FFC4, FFDA, around 60 instances of FF00, and finally the footer FFD9.
 
 Here is the breakdown of the byte sizes I extracted for each:
@@ -72,16 +72,16 @@ dd if=file.raw bs=1 skip=$((0x21c72)) count=16 of=segment_ffda.bin
 Well, the result is still not perfect, but at least the bank account number is almost visible. This is likely due to some missing fragments that I haven’t been able to locate yet. Maybe I’ll be able to find them next time.
 Here’s the first image I recovered:
 
-![FirstPicture](/img/BankAccount/3-1.jpg)
+[FirstPicture](/img/BankAccount/3-1.jpg)
 
 I tried modifying the hex data by including all bytes before the FF00 fragments in the file. This allowed me to recover almost the entire number. The account number appears to be divided into three groups, each consisting of six digits. However, I was still missing one digit to complete the challenge.
 Here’s the second image I managed to recover:
 
-![SecondPicture](/img/BankAccount/3-2.jpg)
+[SecondPicture](/img/BankAccount/3-2.jpg)
 
 Lastly, I attempted to remove all hex data before the first FF00 fragment I found. With this approach, I obtained the final image.
 
-![ThirdPicture](/img/BankAccount/3-3.jpg)
+[ThirdPicture](/img/BankAccount/3-3.jpg)
 
 And finally, I was able to fully recover the bank account number: 983456 294001 991201.
 
